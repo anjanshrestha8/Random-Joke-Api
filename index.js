@@ -96,6 +96,13 @@ app.get("/joke", (request, response) => {
 
   response.send(joke);
 });
+
+/**
+ * @swagger
+ * /add:
+ *    post:
+ *      summary
+ */
 app.post("/add", (request, response) => {
   const newJokes = { id: jokes.length + 1, naya: request.body.joke };
   jokes.push(newJokes);
