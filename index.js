@@ -116,6 +116,10 @@ app.post("/add", (request, response) => {
   response.send(newJokes);
 });
 
+app.get("/", (request, response) => {
+  response.send("Api is working.....");
+});
+
 app.listen(PORT, () => {
   console.log("SERVER IS RUNNING AT:", PORT);
 });
