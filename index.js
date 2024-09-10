@@ -12,7 +12,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:8080/",
+        url: "http://localhost:8080",
       },
     ],
   },
@@ -20,7 +20,7 @@ const options = {
 };
 
 const swaggerSpec = swaggerJSDoc(options);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/random-jokes", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const jokes = [
   {
     id: 1,
@@ -75,6 +75,9 @@ app.use(express.json());
  *    responses:
  *        200:
  *            description: To get jokes
+ *             content:
+ *                application/json:
+
  */
 app.get("/jokes", (request, response) => {
   response.send(jokes);
@@ -101,7 +104,11 @@ app.get("/joke", (request, response) => {
  * @swagger
  * /add:
  *    post:
- *      summary
+ *      summary: This route help us to post jokes
+ *      description: This route update the array of jokes
+ *      responses:
+ *        200:
+ *          description: This is a post route
  */
 app.post("/add", (request, response) => {
   const newJokes = { id: jokes.length + 1, naya: request.body.joke };
