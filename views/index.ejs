@@ -4,14 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="/public/index.css">
+    <link rel="stylesheet" href="index.css">
   </head>
     <main>
-        <div class="header-section">
+        <div class="wrapper-section">
             <h1>Random Jokes API</h1>
-            <p>Status: <%= message.state%></p>
-            <a href="/joke"><button>Get Single Joke</button></a>
+            <p class="status">Status: <%= message.state%></p>
+            <a href="/joke"><button >Get Single Joke</button></a>
             <a href="/jokes"><button>Get Jokes</button></a>
+            <a href="/add"><button>Add Joke</button></a>
+
+        </div>
+        <div class="jokes-card">
+          <label class="tags"><b>Setup: </b></label>
+          <label class="joke"> <%= message.setup %><br></label>
+          <label class="tags"><b>Punchline:</b></label>
+           <label  class="joke"><%= message.punchline %></label>
         </div>
     </main>
   </body>

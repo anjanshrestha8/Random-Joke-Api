@@ -104,7 +104,7 @@ app.get("/joke", (request, response) => {
   let joke = jokes[Math.floor(Math.random() * jokes.length)];
   console.log(joke);
 
-  response.render("joke", {
+  response.render("index", {
     message: {
       setup: joke.setup,
       punchline: joke.punchline,
@@ -124,9 +124,12 @@ app.get("/joke", (request, response) => {
  *          description: This is a post route
  */
 app.post("/add", (request, response) => {
-  const newJokes = { id: jokes.length + 1, naya: request.body.joke };
-  jokes.push(newJokes);
-  response.send(newJokes);
+  const newJoke = {
+    setup: request.body.setup,
+    punchline: request.body.punchline,
+  };
+  jokes.push(newJoke);
+  response.redirect("/jokes");
 });
 
 app.get("/", (request, response) => {
