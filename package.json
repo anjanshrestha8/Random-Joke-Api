@@ -15,6 +15,7 @@
     "express": "^4.19.2",
     "nodemon": "^3.1.4",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "urlencoded-body-parser": "^3.0.0"
   }
 }

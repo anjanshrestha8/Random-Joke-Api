@@ -65,6 +65,7 @@ const jokes = [
 ];
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 /**
@@ -123,15 +124,18 @@ app.get("/joke", (request, response) => {
  *        200:
  *          description: This is a post route
  */
-app.post("/add", (request, response) => {
+app.post("/add-joke", (request, response) => {
   const newJoke = {
     setup: request.body.setup,
     punchline: request.body.punchline,
   };
+  console.log(newJoke);
   jokes.push(newJoke);
-  response.redirect("/jokes");
+  response.redirect("jokes");
 });
-
+app.get("/add", (request, response) => {
+  response.render("addJoke");
+});
 app.get("/", (request, response) => {
   response.render("index", {
     message: {
