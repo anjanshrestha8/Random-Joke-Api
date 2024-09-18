@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const PORT = 8080;
-
+const PORT = 8000;
+let status = "Server is running.....";
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -23,49 +23,50 @@ const swaggerSpec = swaggerJSDoc(options);
 app.use("/random-jokes", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const jokes = [
   {
-    id: 1,
-    joke: "Why don’t graveyards ever get overcrowded? People are dying to get in.",
+    setup: "Why don’t graveyards ever get overcrowded?",
+    punchline: "Because people are dying to get in.",
   },
   {
-    id: 2,
-    joke: "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    setup: "Why don't skeletons play music at parties?",
+    punchline: "Because they don't have the guts.",
   },
   {
-    id: 3,
-    joke: "My grandfather said my generation relies too much on technology. So I unplugged his life support.",
+    setup: "I told my wife she was drawing her eyebrows too high.",
+    punchline: "She looked surprised.",
   },
   {
-    id: 4,
-    joke: "I have a stepladder because my real ladder left when I was a kid.",
+    setup: "Why don’t cannibals eat clowns?",
+    punchline: "Because they taste funny.",
   },
   {
-    id: 5,
-    joke: "Dark humor is like food. Not everyone gets it.",
+    setup: "I have a joke about death, but…",
+    punchline: "It’s over everyone’s head.",
   },
   {
-    id: 6,
-    joke: "Why don’t skeletons fight each other? They don’t have the guts.",
+    setup: "Why did the old man fall into the well?",
+    punchline: "Because he couldn’t see that well.",
   },
   {
-    id: 7,
-    joke: "I was going to tell a dead baby joke, but I decided to abort.",
+    setup: "My grandfather said my generation relies too much on technology.",
+    punchline: "So I unplugged his life support.",
   },
   {
-    id: 8,
-    joke: "Why don’t cannibals eat clowns? Because they taste funny.",
+    setup: "The cemetery is such a popular place.",
+    punchline: "People are just dying to get there.",
   },
   {
-    id: 9,
-    joke: "The doctor gave me some cream for my skin rash. He said I was a sight for psoriasis.",
+    setup: "Why don’t orphans play hide and seek?",
+    punchline: "Because good luck finding them.",
   },
   {
-    id: 10,
-    joke: "What did the Titanic say as it sank? I’m nominating all passengers for the Ice Bucket Challenge.",
+    setup: "Dark humor is like food.",
+    punchline: "Not everyone gets it.",
   },
 ];
 
 app.use(express.json());
-
+app.set("view engine", "ejs");
+app.use(express.static("public"));
 /**
  * @swagger
  * /jokes:
@@ -80,7 +81,12 @@ app.use(express.json());
 
  */
 app.get("/jokes", (request, response) => {
-  response.send(jokes);
+  response.render("jokes", {
+    message: {
+      state: status,
+      jokes: jokes,
+    },
+  });
 });
 
 /**
@@ -96,8 +102,15 @@ app.get("/jokes", (request, response) => {
 
 app.get("/joke", (request, response) => {
   let joke = jokes[Math.floor(Math.random() * jokes.length)];
+  console.log(joke);
 
-  response.send(joke);
+  response.render("joke", {
+    message: {
+      setup: joke.setup,
+      punchline: joke.punchline,
+      state: status,
+    },
+  });
 });
 
 /**
@@ -117,7 +130,11 @@ app.post("/add", (request, response) => {
 });
 
 app.get("/", (request, response) => {
-  response.send("Api is working.....");
+  response.render("index", {
+    message: {
+      state: status,
+    },
+  });
 });
 
 app.listen(PORT, () => {

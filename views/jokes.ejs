@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="jokes.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+        <div class="button-wrapper">
+            <a href="/"><button>Home</button></a>
+            <a href="/joke"><button>Joke</button></a>
+
+        </div>
+        <div class="jokes-card-wrapper">
+
+            <% for(let i=0; i<message.jokes.length; i++){ %>
+                   
+                    <div class="jokes-card">
+                        <label class="tags"><b>Setup: </b></label>
+                           <label class="joke"> <%= message.jokes[i].setup %><br></label>
+                        <label class="tags"><b>Punchline:</b></label>
+                            <label  class="joke"><%= message.jokes[i].punchline %></label>
+                </div>
+                <% } %>
+            </div>
+    </main>
+
+  </body>
+</html>
