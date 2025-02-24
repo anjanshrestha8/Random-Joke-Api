@@ -44,6 +44,8 @@ A simple Node.js application that provides random jokes through an API. This pro
 - ```/joke```: Second API provide single joke at a time randomly
 - ```/add-joke```: Last API can be used to add the jokes in the storage
 
+- random-joke-api-pi.vercel.app
+
 
 ### Swagger UI 
 
